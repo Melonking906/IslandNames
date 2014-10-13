@@ -1,6 +1,9 @@
+# IslandNames Config - loyloy.io
 type: mysql
 host: localhost
 port: '8889'
 user: root
 password: root
 database: loyloy
+worlds:
+  - Spore

@@ -23,7 +23,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class FoundCommand implements CommandExecutor
 
     public FoundCommand( IslandNames p )
     {
-        ic = p.getIslandCraft();
+        ic = p.getIc();
     }
 
     @Override
@@ -50,7 +49,7 @@ public class FoundCommand implements CommandExecutor
 
         Player p = (Player) sender;
 
-        if( ! p.getLocation().getWorld().getName().equals( "Spore" ) )
+        if( ! IslandNames.isIslandWorld( p.getLocation().getWorld().getName() ) )
         {
             p.sendMessage( PREFIX + ChatColor.RED + "Sorry but.. there are no islands in this world." );
             return true;

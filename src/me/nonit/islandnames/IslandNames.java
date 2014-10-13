@@ -11,14 +11,16 @@ import com.github.hoqhuuep.islandcraft.api.IslandCraft;
 import com.github.hoqhuuep.islandcraft.bukkit.IslandCraftPlugin;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class IslandNames extends JavaPlugin
 {
-    private Set<SQL> databases;
     private static SQL db;
+    private static List<String> worlds;
 
-    private IslandCraft islandCraft;
+    private Set<SQL> databases;
+    private IslandCraft ic;
 
     public IslandNames()
     {
@@ -31,7 +33,7 @@ public class IslandNames extends JavaPlugin
         try
         {
             final IslandCraftPlugin islandCraftPlugin = getPlugin( IslandCraftPlugin.class );
-            islandCraft = islandCraftPlugin.getIslandCraft();
+            ic = islandCraftPlugin.getIslandCraft();
         }
         catch( final Exception e )
         {
@@ -57,12 +59,14 @@ public class IslandNames extends JavaPlugin
         getCommand("found").setExecutor( new FoundCommand(this) );
 
         pm.registerEvents( new PlayerListener( this ), this );
+
+        worlds = getConfig().getStringList( "worlds" );
     }
 
     @Override
     public void onDisable()
     {
-        islandCraft = null;
+        ic = null;
         db.disconnect();
     }
 
@@ -99,13 +103,18 @@ public class IslandNames extends JavaPlugin
         getLogger().info( message );
     }
 
-    public IslandCraft getIslandCraft()
+    public IslandCraft getIc()
     {
-        return islandCraft;
+        return ic;
     }
 
     public static SQL getDb()
     {
         return db;
+    }
+
+    public static boolean isIslandWorld( String world )
+    {
+        return worlds.contains( world );
     }
 }

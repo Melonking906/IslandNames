@@ -19,7 +19,7 @@ public class PlayerListener implements Listener
 
     public PlayerListener( IslandNames p )
     {
-        ic = p.getIslandCraft();
+        ic = p.getIc();
     }
 
     @EventHandler
@@ -27,7 +27,7 @@ public class PlayerListener implements Listener
     {
         Player p = e.getPlayer();
 
-        if( ! p.getLocation().getWorld().getName().equals( "Spore" ) )
+        if( ! IslandNames.isIslandWorld( p.getLocation().getWorld().getName() ) )
         {
             return;
         }
