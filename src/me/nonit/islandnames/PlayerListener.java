@@ -70,6 +70,6 @@ public class PlayerListener implements Listener
     @EventHandler
     public void onTeleport( PlayerTeleportEvent e )
     {
-        new PlayerMoveEvent( e.getPlayer(), e.getFrom(), e.getTo() );
+        onMove( new PlayerMoveEvent( e.getPlayer(), e.getFrom(), e.getTo() ) );
     }
 }
