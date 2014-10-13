@@ -1,0 +1,10 @@
+name: IslandNames
+main: me.nonit.islandnames.IslandNames
+version: 0.1
+description: Set names for IslandCraft
+author: Melonking
+depend: [IslandCraft]
+
+commands:
+  found:
+    description: Found an island!
