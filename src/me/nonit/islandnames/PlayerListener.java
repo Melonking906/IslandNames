@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class PlayerListener implements Listener
 {
@@ -64,5 +65,11 @@ public class PlayerListener implements Listener
 
             TitleMsg.send( p, title, subtitle);
         }
+    }
+
+    @EventHandler
+    public void onTeleport( PlayerTeleportEvent e )
+    {
+        new PlayerMoveEvent( e.getPlayer(), e.getFrom(), e.getTo() );
     }
 }
