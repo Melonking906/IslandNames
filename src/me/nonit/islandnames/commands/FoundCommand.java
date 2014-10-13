@@ -7,6 +7,7 @@ import com.github.hoqhuuep.islandcraft.api.IslandCraft;
 import me.nonit.islandnames.IslandNames;
 import me.nonit.islandnames.TitleMsg;
 import me.nonit.islandnames.databases.SQL;
+import net.milkbowl.vault.economy.Economy;
 import org.apache.commons.lang.WordUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -29,7 +30,9 @@ import java.util.List;
 public class FoundCommand implements CommandExecutor
 {
     private static final SQL db = IslandNames.getDb();
+    private static final Economy e = IslandNames.getEconomy();
     private static final String PREFIX = ChatColor.YELLOW + "[Loy]" + ChatColor.GREEN + " ";
+    private static final Double COST = 500.0;
 
     private IslandCraft ic;
 
@@ -97,10 +100,23 @@ public class FoundCommand implements CommandExecutor
             return true;
         }
 
+        if( e.getBalance( p ) < COST )
+        {
+            p.sendMessage( PREFIX + ChatColor.RED + "It costs " + ChatColor.WHITE + e.format( COST ) + ChatColor.RED +
+                                                    " to found and island, you have " + ChatColor.WHITE + e.format( e.getBalance( p ) ) + ChatColor.RED + "!" );
+            return true;
+        }
+
         String name = args[0];
         name = ChatColor.translateAlternateColorCodes( '&', name );
         name = ChatColor.stripColor( name );
         name = WordUtils.capitalizeFully( name );
+
+        if( name.length() > 8 )
+        {
+            p.sendMessage( PREFIX + ChatColor.RED + "Sorry but names cant be longer than 8 letters!" );
+            return true;
+        }
 
         if( ! name.equals( "Unnamed" ) && db.isNameUsed( name ) )
         {
@@ -117,6 +133,9 @@ public class FoundCommand implements CommandExecutor
         }
 
         p.sendMessage( PREFIX + "Success, this " + type + " is now officially called " + ChatColor.YELLOW + name + ChatColor.GREEN + "!" );
+
+        e.withdrawPlayer( p, COST );
+        e.depositPlayer( "IoCo", COST );
 
         if( ! isSea && ! name.equals( "Unnamed" ) )
         {

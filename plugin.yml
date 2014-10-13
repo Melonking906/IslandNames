@@ -3,7 +3,7 @@ main: me.nonit.islandnames.IslandNames
 version: 0.1
 description: Set names for IslandCraft
 author: Melonking
-depend: [IslandCraft]
+depend: [IslandCraft,Vault]
 
 commands:
   found:

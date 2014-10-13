@@ -4,7 +4,9 @@ import me.nonit.islandnames.commands.FoundCommand;
 import me.nonit.islandnames.databases.MySQL;
 import me.nonit.islandnames.databases.SQL;
 import me.nonit.islandnames.databases.SQLite;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.github.hoqhuuep.islandcraft.api.IslandCraft;
@@ -18,6 +20,7 @@ public class IslandNames extends JavaPlugin
 {
     private static SQL db;
     private static List<String> worlds;
+    private static Economy economy = null;
 
     private Set<SQL> databases;
     private IslandCraft ic;
@@ -40,6 +43,12 @@ public class IslandNames extends JavaPlugin
             getLogger().severe( "Could not find IslandCraft, please make sure plugin is installed correctly." );
             setEnabled( false );
             return;
+        }
+
+        if( ! setupEconomy() )
+        {
+            getLogger().info( "There is no econ plugin installed..." );
+            setEnabled( false );
         }
 
         databases.add( new MySQL( this ) );
@@ -98,9 +107,25 @@ public class IslandNames extends JavaPlugin
         return true;
     }
 
+    private boolean setupEconomy()
+    {
+        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+        if (economyProvider != null)
+        {
+            economy = economyProvider.getProvider();
+        }
+
+        return (economy != null);
+    }
+
     public void log( String message )
     {
         getLogger().info( message );
+    }
+
+    public static Economy getEconomy()
+    {
+        return economy;
     }
 
     public IslandCraft getIc()
