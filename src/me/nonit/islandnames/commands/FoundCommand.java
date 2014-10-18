@@ -133,6 +133,7 @@ public class FoundCommand implements CommandExecutor
         }
 
         p.sendMessage( PREFIX + "Success, this " + type + " is now officially called " + ChatColor.YELLOW + name + ChatColor.GREEN + "!" );
+        p.sendMessage( PREFIX + "You payed " + ChatColor.YELLOW + e.format( COST ) + ChatColor.GREEN + " to found this " + type + "." );
 
         e.withdrawPlayer( p, COST );
         e.depositPlayer( "IoCo", COST );

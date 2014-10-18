@@ -26,6 +26,14 @@ public class PlayerListener implements Listener
     @EventHandler
     public void onMove( PlayerMoveEvent e )
     {
+        Location from = e.getFrom();
+        Location to = e.getTo();
+
+        if( from.getBlock().equals( to.getBlock() ) )
+        {
+            return;
+        }
+
         Player p = e.getPlayer();
 
         if( ! IslandNames.isIslandWorld( p.getLocation().getWorld().getName() ) )
@@ -34,9 +42,6 @@ public class PlayerListener implements Listener
         }
 
         ICWorld icWorld = ic.getWorld( e.getPlayer().getWorld().getName() );
-
-        Location from = e.getFrom();
-        Location to = e.getTo();
 
         ICIsland fromIsland = icWorld.getIslandAt( from.getBlockX(), from.getBlockZ() );
         ICIsland toIsland = icWorld.getIslandAt( to.getBlockX(), to.getBlockZ() );
@@ -56,6 +61,10 @@ public class PlayerListener implements Listener
             {
                 title = ChatColor.AQUA + name + " Sea";
             }
+            if( icWorld.getBiomeAt( toIsland.getCenter() ).equals( ICBiome.SWAMPLAND ) )
+            {
+                title = ChatColor.GREEN + name + " Swamp";
+            }
 
             String subtitle = "";
             if( name.equals( "Unnamed" ) )
@@ -70,6 +79,11 @@ public class PlayerListener implements Listener
     @EventHandler
     public void onTeleport( PlayerTeleportEvent e )
     {
+        if( ! IslandNames.isIslandWorld( e.getTo().getWorld().getName() ) )
+        {
+            return;
+        }
+
         onMove( new PlayerMoveEvent( e.getPlayer(), e.getFrom(), e.getTo() ) );
     }
 }
