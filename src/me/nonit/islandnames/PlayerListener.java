@@ -17,10 +17,12 @@ public class PlayerListener implements Listener
 {
     private IslandCraft ic;
     private static final SQL db = IslandNames.getDb();
+    private final Oceans oceans;
 
     public PlayerListener( IslandNames p )
     {
         ic = p.getIc();
+        oceans = new Oceans();
     }
 
     @EventHandler
@@ -66,10 +68,23 @@ public class PlayerListener implements Listener
                 title = ChatColor.GREEN + name + " Swamp";
             }
 
-            String subtitle = "";
+            String subtitle;
+
             if( name.equals( "Unnamed" ) )
             {
                 subtitle = ChatColor.GREEN + "Name it with " + ChatColor.WHITE + "/found" + ChatColor.GREEN + " :D";
+            }
+            else
+            {
+                String oceanName = oceans.getOceanName( toIsland.getCenter() );
+                if( oceanName != null )
+                {
+                    subtitle = ChatColor.GRAY + oceanName + " Ocean";
+                }
+                else
+                {
+                    subtitle = ChatColor.GRAY + "Uncharted Ocean";
+                }
             }
 
             TitleMsg.send( p, title, subtitle);
