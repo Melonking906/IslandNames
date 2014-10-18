@@ -69,7 +69,6 @@ public class PlayerListener implements Listener
             }
 
             String subtitle;
-
             if( name.equals( "Unnamed" ) )
             {
                 subtitle = ChatColor.GREEN + "Name it with " + ChatColor.WHITE + "/found" + ChatColor.GREEN + " :D";
@@ -79,11 +78,11 @@ public class PlayerListener implements Listener
                 String oceanName = oceans.getOceanName( toIsland.getCenter() );
                 if( oceanName != null )
                 {
-                    subtitle = ChatColor.GRAY + oceanName + " Ocean";
+                    subtitle = ChatColor.AQUA + oceanName + " Ocean";
                 }
                 else
                 {
-                    subtitle = ChatColor.GRAY + "Uncharted Ocean";
+                    subtitle = ChatColor.AQUA + "" + ChatColor.MAGIC + "Uncharted" + ChatColor.AQUA + " Ocean";
                 }
             }
 

@@ -112,9 +112,9 @@ public class FoundCommand implements CommandExecutor
         name = ChatColor.stripColor( name );
         name = WordUtils.capitalizeFully( name );
 
-        if( name.length() > 8 )
+        if( name.length() >= 10 )
         {
-            p.sendMessage( PREFIX + ChatColor.RED + "Sorry but names cant be longer than 8 letters!" );
+            p.sendMessage( PREFIX + ChatColor.RED + "Sorry but names can't be longer than 10 letters!" );
             return true;
         }
 

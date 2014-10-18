@@ -3,6 +3,7 @@ package me.nonit.islandnames;
 import com.github.hoqhuuep.islandcraft.api.ICLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.World;
 
 import java.util.ArrayList;
@@ -15,7 +16,15 @@ public class Oceans
     public Oceans()
     {
         oceans = new ArrayList<Ocean>();
-        oceans.add( new Ocean( "Wet", "Spore", 16, 32, -48, -32 ) );
+        oceans.add( new Ocean( "Tana", "Spore", -48, -32, -112, -96 ) );
+        oceans.add( new Ocean( "Garlen", "Spore", 16, -32, -48, -96 ) );
+        oceans.add( new Ocean( "Borea", "Spore", 80, -32, 16, -96 ) );
+        oceans.add( new Ocean( "Lorian", "Spore", -48, -32, -112, -32 ) );
+        oceans.add( new Ocean( "Wytte", "Spore", 16, 32, -48, -32 ) );
+        oceans.add( new Ocean( "Nevba", "Spore", 80, 32, 16, -32 ) );
+        oceans.add( new Ocean( "Demeter", "Spore", -48, 96, -112, 32 ) );
+        oceans.add( new Ocean( "Etiros", "Spore", 16, 96, -48, 32 ) );
+        oceans.add( new Ocean( "Prima", "Spore", 80, 96, 16, 32 ) );
     }
 
     public String getOceanName( ICLocation l )
@@ -40,7 +49,7 @@ public class Oceans
         private int xMin;
         private int zMin;
 
-        public Ocean( String name, String world ,int xMax, int zMax, int xMin, int zMin )
+        public Ocean( String name, String world, int xMax, int zMax, int xMin, int zMin )
         {
             this.name = name;
             this.world = world;
@@ -55,13 +64,14 @@ public class Oceans
             return name;
         }
 
-        public boolean contains( ICLocation l )
+        public boolean contains( ICLocation icL )
         {
-            int x = l.getX();
-            int z = l.getZ();
+            double x = icL.getX();
+            double z = icL.getZ();
 
             World w = Bukkit.getServer().getWorld( world );
-            Chunk c = w.getChunkAt( x, z );
+            Location l = new Location( w, x, 60, z );
+            Chunk c = w.getChunkAt( l );
 
             if( c.getX() <= xMax && c.getX() >= xMin )
             {

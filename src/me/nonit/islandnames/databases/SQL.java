@@ -190,6 +190,8 @@ public abstract class SQL
     {
         unsetName( world, center );
 
+        name = name.replace( "'", "''" );
+
         query( "INSERT INTO islandnames_names (name, world_name, center_x, center_z) " +
                 "VALUES ('" + name + "','" + world + "'," + center.getX() + "," + center.getZ() + ");", false );
 
@@ -202,6 +204,8 @@ public abstract class SQL
         {
             return true;
         }
+
+        name = name.replace( "'", "''" );
 
         ArrayList<HashMap<String,String>> data = query( "SELECT name FROM islandnames_names WHERE name = '" + name + "';", true );
 
