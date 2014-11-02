@@ -19,7 +19,7 @@ public class Oceans
         oceans.add( new Ocean( "Tana", "Spore", -48, -32, -112, -96 ) );
         oceans.add( new Ocean( "Garlen", "Spore", 16, -32, -48, -96 ) );
         oceans.add( new Ocean( "Borea", "Spore", 80, -32, 16, -96 ) );
-        oceans.add( new Ocean( "Lorian", "Spore", -48, -32, -112, -32 ) );
+        oceans.add( new Ocean( "Lorian", "Spore", -48, 32, -112, -32 ) );
         oceans.add( new Ocean( "Wytte", "Spore", 16, 32, -48, -32 ) );
         oceans.add( new Ocean( "Nevba", "Spore", 80, 32, 16, -32 ) );
         oceans.add( new Ocean( "Demeter", "Spore", -48, 96, -112, 32 ) );

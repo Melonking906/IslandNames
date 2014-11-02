@@ -1,6 +1,8 @@
 package me.nonit.islandnames;
 
 import me.nonit.islandnames.commands.FoundCommand;
+import me.nonit.islandnames.commands.IslandCommand;
+import me.nonit.islandnames.commands.NameCommand;
 import me.nonit.islandnames.databases.MySQL;
 import me.nonit.islandnames.databases.SQL;
 import me.nonit.islandnames.databases.SQLite;
@@ -65,7 +67,9 @@ public class IslandNames extends JavaPlugin
             pm.disablePlugin( this );
         }
 
-        getCommand("found").setExecutor( new FoundCommand(this) );
+        getCommand("name").setExecutor( new NameCommand(this) );
+        getCommand("island").setExecutor( new IslandCommand(this) );
+        getCommand("found").setExecutor( new FoundCommand() );
 
         pm.registerEvents( new PlayerListener( this ), this );
 

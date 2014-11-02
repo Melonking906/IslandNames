@@ -71,7 +71,7 @@ public class PlayerListener implements Listener
             String subtitle;
             if( name.equals( "Unnamed" ) )
             {
-                subtitle = ChatColor.GREEN + "Name it with " + ChatColor.WHITE + "/found" + ChatColor.GREEN + " :D";
+                subtitle = ChatColor.GREEN + "Name it with " + ChatColor.WHITE + "/name" + ChatColor.GREEN + " :D";
             }
             else
             {
