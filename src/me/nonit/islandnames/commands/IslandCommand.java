@@ -68,7 +68,7 @@ public class IslandCommand implements CommandExecutor
             oceanName = ChatColor.MAGIC + "Unnamed";
         }
 
-        p.sendMessage( PREFIX + "You're in " + islandName + " " + type + ", of the " + oceanName + " Ocean!" );
+        p.sendMessage( PREFIX + "You're in " + ChatColor.YELLOW + islandName + " " + type + ChatColor.GREEN + ", of the " + ChatColor.YELLOW + oceanName + " Ocean" + ChatColor.GREEN + "!" );
 
         return true;
     }

@@ -91,7 +91,7 @@ public class NameCommand implements CommandExecutor
             return true;
         }
 
-        if( ! islandName.equals( "Unnamed" ) && ! p.hasPermission( "islandnames.refound" ) )
+        if( ! islandName.equals( "Unnamed" ) && ! p.hasPermission( "islandnames.rename" ) )
         {
             p.sendMessage( PREFIX + ChatColor.RED + "This island is already called " + islandName + "!" );
             return true;
