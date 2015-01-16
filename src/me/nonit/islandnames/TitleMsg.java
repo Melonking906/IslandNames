@@ -1,10 +1,11 @@
 package me.nonit.islandnames;
 
-import net.minecraft.server.v1_7_R4.ChatSerializer;
-import net.minecraft.server.v1_7_R4.PlayerConnection;
-import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
+import net.minecraft.server.v1_8_R1.ChatSerializer;
+import net.minecraft.server.v1_8_R1.EnumTitleAction;
+import net.minecraft.server.v1_8_R1.PacketPlayOutTitle;
+import net.minecraft.server.v1_8_R1.PlayerConnection;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.spigotmc.ProtocolInjector;
 
 public class TitleMsg
 {
@@ -14,14 +15,12 @@ public class TitleMsg
 
     public static void send( Player player, String title, String subtitle )
     {
-        PlayerConnection craftPlayer = ( ( CraftPlayer ) player ).getHandle().playerConnection;
+        PlayerConnection craftPlayer = ((CraftPlayer )player).getHandle().playerConnection;
 
-        ProtocolInjector.PacketTitle length = new ProtocolInjector.PacketTitle( ProtocolInjector.PacketTitle.Action.TIMES, FADE_IN, TIME, FADE_OUT );
-        ProtocolInjector.PacketTitle titleBig = new ProtocolInjector.PacketTitle( ProtocolInjector.PacketTitle.Action.TITLE, ChatSerializer.a( "{'text': ''}" ).a( title ) );
-        ProtocolInjector.PacketTitle titleSmall = new ProtocolInjector.PacketTitle( ProtocolInjector.PacketTitle.Action.SUBTITLE, ChatSerializer.a( "{'text': ''}" ).a( subtitle ) );
+        PacketPlayOutTitle titleBig = new PacketPlayOutTitle( EnumTitleAction.TITLE, ChatSerializer.a( "{'text': ''}" ).a(title), FADE_IN, TIME, FADE_OUT );
+        PacketPlayOutTitle titleSmall = new PacketPlayOutTitle( EnumTitleAction.SUBTITLE, ChatSerializer.a("{'text': ''}").a(subtitle), FADE_IN, TIME, FADE_OUT );
 
-        craftPlayer.sendPacket( length );
-        craftPlayer.sendPacket( titleBig );
-        craftPlayer.sendPacket( titleSmall );
+        craftPlayer.sendPacket(titleBig);
+        craftPlayer.sendPacket(titleSmall);
     }
 }
